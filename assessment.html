@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_standard" name="shell-type"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"inverse-on-surface":"#eaf1ff","on-background":"#0b1c30","on-primary-fixed-variant":"#004d67","surface-container":"#e5eeff","on-primary-fixed":"#001e2b","inverse-surface":"#213145","outline":"#70787e","surface-container-low":"#eff4ff","error-container":"#ffdad6","on-error-container":"#93000a","surface-container-highest":"#d3e4fe","primary-container":"#0f5b78","on-tertiary-fixed":"#2f1500","surface-bright":"#f8f9ff","on-secondary-container":"#fffbff","tertiary":"#613100","on-tertiary-container":"#ffbc86","outline-variant":"#c0c8cd","on-secondary-fixed-variant":"#0039b5","on-secondary-fixed":"#001551","tertiary-fixed":"#ffdcc3","surface-variant":"#d3e4fe","on-surface-variant":"#40484d","primary":"#00435a","on-secondary":"#ffffff","surface-container-lowest":"#ffffff","surface-tint":"#206582","surface-dim":"#cbdbf5","background":"#f8f9ff","on-primary":"#ffffff","primary-fixed-dim":"#91cef0","on-tertiary-fixed-variant":"#6e3900","secondary-fixed-dim":"#b7c4ff","surface":"#f8f9ff","on-error":"#ffffff","secondary-container":"#4069f2","secondary-fixed":"#dce1ff","error":"#ba1a1a","inverse-primary":"#91cef0","on-primary-container":"#94d1f3","secondary":"#1d4ed8","tertiary-container":"#824500","on-tertiary":"#ffffff","surface-container-high":"#dce9ff","on-surface":"#0b1c30","tertiary-fixed-dim":"#ffb77d","primary-fixed":"#c1e8ff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-lg":"1rem","space-md":"0.75rem","space-sm":"0.5rem","space-xl":"1.5rem","gutter":"1rem","margin":"1.5rem"},"fontFamily":{"headline-lg":["Inter"],"label-sm":["Inter"],"code-metric":["JetBrains Mono"],"body-md":["Inter"],"headline-sm":["Inter"],"body-lg":["Inter"],"body-sm":["Inter"],"display-score":["JetBrains Mono"],"headline-md":["Inter"],"code-reference":["JetBrains Mono"],"label-md":["Inter"]},"fontSize":{"headline-lg":["1.5rem",{"lineHeight":"2rem","fontWeight":"600"}],"label-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"500"}],"code-metric":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"600"}],"body-md":["0.875rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"headline-sm":["1rem",{"lineHeight":"1.5rem","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"body-sm":["0.75rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"display-score":["2.5rem",{"lineHeight":"3rem","fontWeight":"700"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","fontWeight":"600"}],"code-reference":["0.75rem",{"lineHeight":"1rem","fontWeight":"500"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"500"}]}}}}</script>
+<script src="app.js"></script>
+</head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col antialiased">
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+<div class="h-16 w-full px-margin flex items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-md">
+<img alt="门诊助手" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UKJfovzMxCa2LS1MyJvTnIx7WqDT4oJk1gzlgAZxmVwvG5y_5AUJtY3pSDIxMyY0P6aR4OLNqBXaeVJgBl0_WHcwVjmOUkVWQgiVkGW9tNWHlyB-ItdlCqfG5vGHMt4-byWuND7wgaDLaqxQN6k8Q_-C1mKeuSAnpxmi56O_eQvS5UkPKyBPyqd-AklWiZarXqc2jutBcmVFMcvSgiMkcj46Q0uRaBT46uuO5Dc2dnXHhuJjhrIy5SszE"/>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">门诊助手</span>
+<span class="px-space-sm py-0.5 rounded-DEFAULT bg-surface-container-high text-primary font-label-sm text-label-sm font-medium tracking-wide">MAFLD 临床决策 MVP</span>
+</div>
+<nav class="hidden md:flex items-center gap-space-md" data-active-classes="bg-surface-container text-primary font-semibold rounded-DEFAULT">
+<a class="px-space-md py-1.5 transition-colors bg-surface-container text-primary font-semibold rounded-DEFAULT" href="assessment.html">评估工作台</a>
+<a class="px-space-md py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="guidelines.html">循证指南</a>
+<a class="px-space-md py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="records.html">接诊清单</a>
+</nav>
+<div class="flex items-center gap-space-md">
+<div class="hidden sm:flex flex-col text-right">
+<span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">李敏 医师</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant leading-tight">城东社区卫生服务中心</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full pt-16 flex-1 bg-surface">
+<div class="flex flex-col w-full">
+<div class="w-full max-w-2xl mx-auto px-gutter py-space-xl">
+<div class="flex items-center justify-between mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="p-1.5 rounded-DEFAULT bg-surface-container-highest text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">CLINICAL INTAKE</span>
+<h1 class="font-headline-md text-headline-md text-on-surface">患者基础及检验信息 (录入)</h1>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-low text-primary font-code-reference text-code-reference">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>门诊快捷工作流 · 步骤 1/2</span>
+</div>
+</div>
+<form class="flex flex-col gap-space-lg" id="mafldAssessmentForm">
+<!-- Section 1: Demographics -->
+<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">person</span>
+<span>基础人口学信息</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-lg">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-space-xs" for="patientAge">年龄</label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low text-on-surface font-code-metric text-code-metric px-space-md py-2.5 rounded-DEFAULT focus:outline-none focus:bg-surface-container-lowest transition-colors pr-12" id="patientAge" max="120" min="0" required="" type="number" value="52"/>
+<span class="absolute right-space-md font-label-sm text-label-sm text-outline select-none">岁</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-space-xs">性别</label>
+<div class="grid grid-cols-2 gap-space-sm h-[42px]">
+<label class="flex items-center justify-center gap-space-xs px-space-md rounded-DEFAULT cursor-pointer transition-all bg-surface-container-high text-primary font-label-md text-label-md" id="label-gender-male">
+<input checked="" class="hidden" name="gender" onchange="updateGenderUi()" type="radio" value="male"/>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">male</span>
+<span>男</span>
+</label>
+<label class="flex items-center justify-center gap-space-xs px-space-md rounded-DEFAULT cursor-pointer transition-all bg-surface-container-low text-on-surface-variant font-label-md text-label-md" id="label-gender-female">
+<input class="hidden" name="gender" onchange="updateGenderUi()" type="radio" value="female"/>
+<span class="material-symbols-outlined text-[18px]">female</span>
+<span>女</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Metabolic Comorbidities -->
+<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">vital_signs</span>
+<span>代谢综合征与心血管风险</span>
+</div>
+<span class="font-code-reference text-code-reference text-outline" id="comorbidityCount">已选 2 项</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+<label class="flex items-center gap-space-xs p-space-md rounded-DEFAULT bg-surface-container text-primary cursor-pointer select-none transition-colors" id="wrapper-t2d">
+<input checked="" class="w-4 h-4 accent-primary rounded-DEFAULT cursor-pointer" name="comorbidity" onchange="toggleBoxBg(this, 'wrapper-t2d')" type="checkbox" value="diabetes"/>
+<span class="font-label-md text-label-md font-semibold">2型糖尿病</span>
+</label>
+<label class="flex items-center gap-space-xs p-space-md rounded-DEFAULT bg-surface-container text-primary cursor-pointer select-none transition-colors" id="wrapper-obesity">
+<input checked="" class="w-4 h-4 accent-primary rounded-DEFAULT cursor-pointer" name="comorbidity" onchange="toggleBoxBg(this, 'wrapper-obesity')" type="checkbox" value="obesity"/>
+<span class="font-label-md text-label-md font-semibold">肥胖 (BMI≥25)</span>
+</label>
+<label class="flex items-center gap-space-xs p-space-md rounded-DEFAULT bg-surface-container-low text-on-surface-variant cursor-pointer select-none transition-colors" id="wrapper-dyslipidemia">
+<input class="w-4 h-4 accent-primary rounded-DEFAULT cursor-pointer" name="comorbidity" onchange="toggleBoxBg(this, 'wrapper-dyslipidemia')" type="checkbox" value="dyslipidemia"/>
+<span class="font-label-md text-label-md">血脂异常</span>
+</label>
+<label class="flex items-center gap-space-xs p-space-md rounded-DEFAULT bg-surface-container-low text-on-surface-variant cursor-pointer select-none transition-colors" id="wrapper-hypertension">
+<input class="w-4 h-4 accent-primary rounded-DEFAULT cursor-pointer" name="comorbidity" onchange="toggleBoxBg(this, 'wrapper-hypertension')" type="checkbox" value="hypertension"/>
+<span class="font-label-md text-label-md">高血压</span>
+</label>
+</div>
+</section>
+<!-- Section 3: Lab Tests / FIB-4 -->
+<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">biotech</span>
+<span>核心实验室指标 (计算 FIB-4 纤维化评分)</span>
+</div>
+<span class="px-space-xs py-0.5 rounded-DEFAULT bg-secondary/10 text-secondary font-code-reference text-code-reference font-semibold">必填项</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-space-xs">
+<div class="flex justify-between items-baseline">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="valAlt">ALT (谷丙)</label>
+<span class="font-code-reference text-code-reference text-outline">U/L</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface font-code-metric text-code-metric px-space-md py-2 rounded-DEFAULT focus:outline-none" id="valAlt" max="2000" min="0" placeholder="参考 9-50" required="" type="number" value="45"/>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-space-xs">
+<div class="flex justify-between items-baseline">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="valAst">AST (谷草)</label>
+<span class="font-code-reference text-code-reference text-outline">U/L</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface font-code-metric text-code-metric px-space-md py-2 rounded-DEFAULT focus:outline-none" id="valAst" max="2000" min="0" placeholder="参考 15-40" required="" type="number" value="38"/>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-space-xs">
+<div class="flex justify-between items-baseline">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="valPlt">血小板 PLT</label>
+<span class="font-code-reference text-code-reference text-outline">×10⁹/L</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface font-code-metric text-code-metric px-space-md py-2 rounded-DEFAULT focus:outline-none" id="valPlt" max="2000" min="0" placeholder="参考 100-300" required="" type="number" value="210"/>
+</div>
+</div>
+<div class="flex items-center gap-space-xs p-space-sm rounded-DEFAULT bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-outline text-[16px]">info</span>
+<span>三项指标将用于系统自动计算 FIB-4 评分（公式：[年龄 × AST] / [PLT × √ALT]）。当前估算值：<strong class="font-code-metric text-primary" id="liveFib4">1.40</strong>（中低临界区）</span>
+</div>
+</section>
+<!-- Section 4: Ultrasound Findings -->
+<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">radiology</span>
+<span>腹部超声检查结果</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-low p-0.5 rounded-DEFAULT">
+<button class="px-space-md py-1 rounded-DEFAULT font-label-sm text-label-sm text-on-surface-variant transition-colors" id="btn-us-not-done" onclick="toggleUsStatus(false)" type="button">未做</button>
+<button class="px-space-md py-1 rounded-DEFAULT font-label-sm text-label-sm font-semibold bg-surface-container-highest text-primary transition-colors" id="btn-us-done" onclick="toggleUsStatus(true)" type="button">已做</button>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm pt-space-xs" id="usFindingsContainer">
+<span class="font-label-sm text-label-sm text-on-surface-variant">超声诊断结论（单选）：</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<label class="flex items-center justify-between p-space-md rounded-DEFAULT bg-surface-container text-primary cursor-pointer select-none transition-colors" id="us-opt-steatosis">
+<div class="flex items-center gap-space-xs">
+<input checked="" class="w-4 h-4 accent-primary cursor-pointer" name="ultrasoundFinding" onchange="updateUsFindingUi()" type="radio" value="steatosis"/>
+<span class="font-label-md text-label-md font-semibold">脂肪肝表现</span>
+</div>
+<span class="material-symbols-outlined text-[18px]">done</span>
+</label>
+<label class="flex items-center justify-between p-space-md rounded-DEFAULT bg-surface-container-low text-on-surface cursor-pointer select-none transition-colors" id="us-opt-cirrhosis">
+<div class="flex items-center gap-space-xs">
+<input class="w-4 h-4 accent-primary cursor-pointer" name="ultrasoundFinding" onchange="updateUsFindingUi()" type="radio" value="cirrhosis"/>
+<span class="font-label-md text-label-md">疑似肝硬化</span>
+</div>
+<span class="px-1.5 py-0.5 rounded-DEFAULT bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">警示</span>
+</label>
+<label class="flex items-center justify-between p-space-md rounded-DEFAULT bg-surface-container-low text-on-surface cursor-pointer select-none transition-colors" id="us-opt-mass">
+<div class="flex items-center gap-space-xs">
+<input class="w-4 h-4 accent-primary cursor-pointer" name="ultrasoundFinding" onchange="updateUsFindingUi()" type="radio" value="mass"/>
+<span class="font-label-md text-label-md">肝脏占位</span>
+</div>
+<span class="px-1.5 py-0.5 rounded-DEFAULT bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">警示</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Primary Action CTA -->
+<div class="pt-space-sm flex flex-col gap-space-sm">
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary py-3.5 px-space-lg rounded-DEFAULT font-headline-sm text-headline-sm font-semibold flex items-center justify-center gap-space-xs transition-colors shadow-md" type="submit" id="submitBtn">
+<span>生成下一步路径</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-space-md text-outline font-label-sm text-label-sm pt-space-xs">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+            依据 2025 基层指南标准
+          </span>
+<span>·</span>
+<span>即刻输出分层处置与患者健康处方</span>
+</div>
+</div>
+</form>
+</div>
+</div>
+<script>
+  function updateGenderUi() {
+    const isMale = document.querySelector('input[name="gender"][value="male"]').checked;
+    const labelMale = document.getElementById('label-gender-male');
+    const labelFemale = document.getElementById('label-gender-female');
+    if (isMale) {
+      labelMale.className = "flex items-center justify-center gap-space-xs px-space-md rounded-DEFAULT cursor-pointer transition-all bg-surface-container-high text-primary font-label-md text-label-md";
+      labelFemale.className = "flex items-center justify-center gap-space-xs px-space-md rounded-DEFAULT cursor-pointer transition-all bg-surface-container-low text-on-surface-variant font-label-md text-label-md";
+    } else {
+      labelMale.className = "flex items-center justify-center gap-space-xs px-space-md rounded-DEFAULT cursor-pointer transition-all bg-surface-container-low text-on-surface-variant font-label-md text-label-md";
+      labelFemale.className = "flex items-center justify-center gap-space-xs px-space-md rounded-DEFAULT cursor-pointer transition-all bg-surface-container-high text-primary font-label-md text-label-md";
+    }
+  }
+
+  function toggleBoxBg(el, wrapperId) {
+    const wrap = document.getElementById(wrapperId);
+    if (el.checked) {
+      wrap.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+      wrap.classList.add('bg-surface-container', 'text-primary', 'font-semibold');
+    } else {
+      wrap.classList.remove('bg-surface-container', 'text-primary', 'font-semibold');
+      wrap.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+    }
+    updateComorbidityCount();
+  }
+
+  function updateComorbidityCount() {
+    const n = document.querySelectorAll('input[name="comorbidity"]:checked').length;
+    document.getElementById('comorbidityCount').textContent = '已选 ' + n + ' 项';
+  }
+
+  let __usDone = true;
+  function toggleUsStatus(done) {
+    __usDone = done;
+    const btnDone = document.getElementById('btn-us-done');
+    const btnNotDone = document.getElementById('btn-us-not-done');
+    const container = document.getElementById('usFindingsContainer');
+    if (done) {
+      btnDone.className = "px-space-md py-1 rounded-DEFAULT font-label-sm text-label-sm font-semibold bg-surface-container-highest text-primary transition-colors";
+      btnNotDone.className = "px-space-md py-1 rounded-DEFAULT font-label-sm text-label-sm text-on-surface-variant transition-colors";
+      container.style.opacity = '1';
+      container.style.pointerEvents = 'auto';
+    } else {
+      btnNotDone.className = "px-space-md py-1 rounded-DEFAULT font-label-sm text-label-sm font-semibold bg-surface-container-highest text-primary transition-colors";
+      btnDone.className = "px-space-md py-1 rounded-DEFAULT font-label-sm text-label-sm text-on-surface-variant transition-colors";
+      container.style.opacity = '0.4';
+      container.style.pointerEvents = 'none';
+    }
+  }
+
+  function updateUsFindingUi() {
+    const selected = document.querySelector('input[name="ultrasoundFinding"]:checked').value;
+    const optSteatosis = document.getElementById('us-opt-steatosis');
+    const optCirrhosis = document.getElementById('us-opt-cirrhosis');
+    const optMass = document.getElementById('us-opt-mass');
+    [optSteatosis, optCirrhosis, optMass].forEach(el => {
+      el.classList.remove('bg-surface-container', 'text-primary');
+      el.classList.add('bg-surface-container-low', 'text-on-surface');
+    });
+    if (selected === 'steatosis') {
+      optSteatosis.classList.remove('bg-surface-container-low', 'text-on-surface');
+      optSteatosis.classList.add('bg-surface-container', 'text-primary');
+    } else if (selected === 'cirrhosis') {
+      optCirrhosis.classList.remove('bg-surface-container-low', 'text-on-surface');
+      optCirrhosis.classList.add('bg-surface-container', 'text-primary');
+    } else if (selected === 'mass') {
+      optMass.classList.remove('bg-surface-container-low', 'text-on-surface');
+      optMass.classList.add('bg-surface-container', 'text-primary');
+    }
+  }
+
+  // FIB-4 实时估算（浏览器端预览；与规则引擎同源）
+  function updateLiveEstimate() {
+    const age = parseFloat(document.getElementById('patientAge').value);
+    const ast = parseFloat(document.getElementById('valAst').value);
+    const alt = parseFloat(document.getElementById('valAlt').value);
+    const plt = parseFloat(document.getElementById('valPlt').value);
+    const el = document.getElementById('liveFib4');
+    const r = MAFLD.computeFib4({ age: age, ast: ast, alt: alt, plt: plt });
+    el.textContent = r.computed ? r.value.toFixed(2) : '—';
+  }
+  ['patientAge','valAst','valAlt','valPlt'].forEach(id => {
+    const e = document.getElementById(id);
+    if (e) e.addEventListener('input', updateLiveEstimate);
+  });
+
+  function handleGeneratePlan(e) {
+    e.preventDefault();
+    const age = parseFloat(document.getElementById('patientAge').value);
+    const gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : null;
+    const comorbidities = Array.from(document.querySelectorAll('input[name="comorbidity"]:checked')).map(el => el.value);
+    const alt = parseFloat(document.getElementById('valAlt').value);
+    const ast = parseFloat(document.getElementById('valAst').value);
+    const plt = parseFloat(document.getElementById('valPlt').value);
+
+    let ultrasound = 'not_done';
+    if (__usDone) {
+      const sel = document.querySelector('input[name="ultrasoundFinding"]:checked');
+      ultrasound = sel ? sel.value : 'steatosis';
+    }
+
+    const payload = {
+      age: Number.isFinite(age) ? age : null,
+      gender: gender,
+      comorbidities: comorbidities,
+      alt: Number.isFinite(alt) ? alt : null,
+      ast: Number.isFinite(ast) ? ast : null,
+      plt: Number.isFinite(plt) ? plt : null,
+      ultrasound: ultrasound,
+    };
+
+    const v = MAFLD.validateInput(payload);
+    if (v.errors.length) {
+      alert('输入有误：' + v.errors.join('；'));
+      return;
+    }
+
+    const result = MAFLD.assess(v.data);
+    result.id = MAFLD.newId();
+    MAFLD.saveAssessment(result); // 浏览器端接诊清单（localStorage 持久化）
+
+    try { sessionStorage.setItem('mafld_current', JSON.stringify(result)); } catch (e) {}
+
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span><span>正在结合指南进行风险分层计算...</span>';
+    btn.disabled = true;
+
+    // 纯前端计算完成，直接跳转结果页（无需后端）
+    setTimeout(function () { window.location.href = 'result.html'; }, 250);
+  }
+
+  document.getElementById('mafldAssessmentForm').addEventListener('submit', handleGeneratePlan);
+
+  // 初始化
+  updateGenderUi();
+  updateUsFindingUi();
+  updateComorbidityCount();
+  updateLiveEstimate();
+</script></main>
+<footer class="w-full bg-surface-container-low py-space-md"><div class="w-full px-margin flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-outline text-[16px]">info</span><span>本工具仅供临床辅助参考，不替代医师独立诊疗决策与处方判断。</span></div><div class="text-outline font-code-reference text-code-reference">MAFLD-CDSS v1.0.0 | 依据 2025 基层指南</div></div></footer></body></html>
