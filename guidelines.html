@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<title>循证指南 · 门诊助手</title>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased font-[Inter]">
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+<div class="h-16 w-full px-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="font-semibold text-lg tracking-tight text-slate-900">门诊助手</span>
+<span class="px-2 py-0.5 rounded bg-slate-100 text-[#00435a] text-xs font-medium">MAFLD 临床决策 MVP</span>
+</div>
+<nav class="hidden md:flex items-center gap-3 text-sm">
+<a class="px-3 py-1.5 rounded text-slate-500 hover:text-slate-900" href="index.html">首页</a>
+<a class="px-3 py-1.5 rounded text-slate-500 hover:text-slate-900" href="assessment.html">评估工作台</a>
+<a class="px-3 py-1.5 rounded bg-slate-100 text-[#00435a] font-semibold" href="guidelines.html">循证指南</a>
+<a class="px-3 py-1.5 rounded text-slate-500 hover:text-slate-900" href="records.html">接诊清单</a>
+</nav>
+</div>
+</header>
+<main class="w-full pt-16 flex-1">
+<div class="max-w-3xl mx-auto px-6 py-12 flex flex-col gap-8">
+<h1 class="text-2xl font-semibold text-slate-900">循证指南与规则说明</h1>
+<p class="text-slate-600 leading-relaxed">本工具依据《代谢相关脂肪性肝病基层诊疗与管理指南（2025年）》构建，将指南中需要医生即时判断的"下一步怎么办"固化为确定性规则，由系统自动计算并呈现，不依赖 AI 自主诊断。</p>
+
+<div class="bg-white rounded-xl shadow-sm p-6 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[#00435a] font-semibold"><span class="material-symbols-outlined">calculate</span><span>FIB-4 计算公式</span></div>
+<p class="text-slate-700">FIB-4 = 年龄 × AST ÷（血小板 × √ALT）。三项实验室指标（ALT、AST、血小板）任一缺失或 ≤0 时，系统不计算 FIB-4，并提示信息不足。</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-6 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[#00435a] font-semibold"><span class="material-symbols-outlined">layers</span><span>风险分层阈值（年龄校正）</span></div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead><tr class="text-slate-500 border-b"><th class="py-2 pr-4">年龄段</th><th class="py-2 pr-4">低风险</th><th class="py-2 pr-4">中风险</th><th class="py-2 pr-4">高风险</th></tr></thead>
+<tbody class="text-slate-700">
+<tr class="border-b border-slate-100"><td class="py-2 pr-4">&lt;65 岁</td><td class="py-2 pr-4">&lt;1.30</td><td class="py-2 pr-4">1.30 – 2.67</td><td class="py-2 pr-4">&gt;2.67</td></tr>
+<tr><td class="py-2 pr-4">≥65 岁</td><td class="py-2 pr-4">&lt;2.00</td><td class="py-2 pr-4">2.00 – 2.67</td><td class="py-2 pr-4">&gt;2.67</td></tr>
+</tbody>
+</table>
+</div>
+<p class="text-xs text-slate-500">边界值 1.30 / 2.00 / 2.67 均归入中风险（含等号）。</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-6 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[#00435a] font-semibold"><span class="material-symbols-outlined">rule</span><span>专科评估触发情形</span></div>
+<ul class="list-disc list-inside text-slate-700 space-y-1">
+<li>腹部超声提示疑似肝硬化</li>
+<li>腹部超声提示肝脏占位</li>
+<li>FIB-4 处于高风险参考区间</li>
+<li>瞬时弹性成像 LSM 提示进展期肝纤维化风险（若已录入）</li>
+<li>存在黄疸、腹水或其他需专科评估的情况（若已录入）</li>
+</ul>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-6 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[#00435a] font-semibold"><span class="material-symbols-outlined">monitor_heart</span><span>瞬时弹性成像 LSM 分层（可选录入）</span></div>
+<p class="text-slate-700">&lt;8 kPa 未提示进展期肝纤维化；8–12 kPa 提示需进一步评估；&gt;12 kPa 提示进展期肝纤维化风险，需进一步专科评估。</p>
+</div>
+
+<div class="bg-amber-50 border-l-4 border-amber-400 rounded-lg p-4 text-sm text-amber-900">
+本工具仅供临床辅助参考，所有结论由规则与模板生成，不替代医师独立诊疗决策与处方判断。规则版本：MAFLD-2025-BASELINE-v1。
+</div>
+</div>
+</main>
+<footer class="w-full bg-slate-100 py-4"><div class="w-full px-6 flex items-center gap-2 text-slate-500 text-sm"><span class="material-symbols-outlined text-[16px]">info</span><span>本工具仅供临床辅助参考，不替代医师独立诊疗决策与处方判断。</span></div></footer>
+</body></html>
