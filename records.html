@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<title>接诊清单 · 门诊助手</title>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased font-[Inter]">
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+<div class="h-16 w-full px-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="font-semibold text-lg tracking-tight text-slate-900">门诊助手</span>
+<span class="px-2 py-0.5 rounded bg-slate-100 text-[#00435a] text-xs font-medium">MAFLD 临床决策 MVP</span>
+</div>
+<nav class="hidden md:flex items-center gap-3 text-sm">
+<a class="px-3 py-1.5 rounded text-slate-500 hover:text-slate-900" href="index.html">首页</a>
+<a class="px-3 py-1.5 rounded text-slate-500 hover:text-slate-900" href="assessment.html">评估工作台</a>
+<a class="px-3 py-1.5 rounded text-slate-500 hover:text-slate-900" href="guidelines.html">循证指南</a>
+<a class="px-3 py-1.5 rounded bg-slate-100 text-[#00435a] font-semibold" href="records.html">接诊清单</a>
+</nav>
+</div>
+</header>
+<main class="w-full pt-16 flex-1">
+<div class="max-w-4xl mx-auto px-6 py-12 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h1 class="text-2xl font-semibold text-slate-900">接诊清单</h1>
+<button id="clearBtn" class="text-sm text-red-600 hover:text-red-700 flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">delete_sweep</span>清空全部</button>
+</div>
+<p class="text-slate-500 text-sm">本页记录保存在当前浏览器本地（localStorage），不会上传服务器，仅用于医生本机回顾。清缓存或更换设备后记录不保留。</p>
+<div id="records-root" class="flex flex-col gap-3"></div>
+</div>
+</main>
+<footer class="w-full bg-slate-100 py-4"><div class="w-full px-6 flex items-center gap-2 text-slate-500 text-sm"><span class="material-symbols-outlined text-[16px]">info</span><span>本工具仅供临床辅助参考，不替代医师独立诊疗决策与处方判断。</span></div></footer>
+
+<script src="app.js"></script>
+<script>
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  }
+  function fmtTime(iso) {
+    try { return new Date(iso).toLocaleString('zh-CN'); } catch (e) { return iso || ''; }
+  }
+  function tierClass(riskLevel) {
+    if (riskLevel === 'low') return 'bg-emerald-100 text-emerald-800';
+    if (riskLevel === 'intermediate') return 'bg-amber-100 text-amber-800';
+    if (riskLevel === 'high') return 'bg-red-100 text-red-800';
+    return 'bg-slate-100 text-slate-700';
+  }
+  function render() {
+    const root = document.getElementById('records-root');
+    const list = MAFLD.getRecords();
+    if (!list.length) {
+      root.innerHTML = '<div class="bg-white rounded-xl shadow-sm p-10 text-center text-slate-400">暂无接诊记录。<a href="assessment.html" class="text-[#00435a] font-medium">前往评估工作台</a> 生成第一条。</div>';
+      return;
+    }
+    root.innerHTML = list.map(function (r) {
+      const fib = r.fib4Computed ? r.fib4 : '—';
+      const ref = (r.referral && r.referral.triggered) ? '<span class="text-red-600 font-medium">需专科评估</span>' : '<span class="text-emerald-700">无需转诊</span>';
+      return '' +
+        '<div class="bg-white rounded-xl shadow-sm p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">' +
+          '<div class="flex flex-col gap-1">' +
+            '<div class="flex items-center gap-2">' +
+              '<span class="font-code-metric font-semibold text-slate-900">FIB-4 ' + esc(fib) + '</span>' +
+              '<span class="px-2 py-0.5 rounded text-xs font-semibold ' + tierClass(r.riskLevel) + '">' + esc(r.riskLabel) + '</span>' +
+            '</div>' +
+            '<div class="text-xs text-slate-500">' + fmtTime(r.assessmentTime) + ' · 年龄 ' + esc(r.ageGroup === '>=65' ? '≥65' : (r.age != null ? r.age : '—')) + ' · ' + ref + '</div>' +
+          '</div>' +
+          '<div class="flex items-center gap-2 shrink-0">' +
+            '<button class="px-3 py-1.5 rounded bg-[#00435a] text-white text-sm flex items-center gap-1" onclick="viewRecord(\'' + esc(r.id) + '\')"><span class="material-symbols-outlined text-[16px]">visibility</span>查看</button>' +
+            '<button class="px-3 py-1.5 rounded bg-slate-100 text-slate-600 text-sm flex items-center gap-1" onclick="delRecord(\'' + esc(r.id) + '\')"><span class="material-symbols-outlined text-[16px]">delete</span>删除</button>' +
+          '</div>' +
+        '</div>';
+    }).join('');
+  }
+  function viewRecord(id) {
+    const rec = MAFLD.getRecords().find(function (r) { return r.id === id; });
+    if (!rec) return;
+    try { sessionStorage.setItem('mafld_current', JSON.stringify(rec)); } catch (e) {}
+    window.location.href = 'result.html';
+  }
+  function delRecord(id) {
+    MAFLD.deleteRecord(id);
+    render();
+  }
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    if (confirm('确认清空全部接诊记录？此操作不可恢复。')) {
+      MAFLD.clearRecords();
+      render();
+    }
+  });
+  render();
+</script>
+</body></html>
